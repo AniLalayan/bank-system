@@ -59,33 +59,10 @@ main {
   font-size: 20px;
 }
 
-.search-bar {
-  position: relative;
-  margin-bottom: 10px;
-  float: right;
-  display: inline-block;
-
-  input {
-    height: 33px;
-    width: 260px;
-    background-color: rgb(0,0,0, 5%);
-    border-radius: 10px;
-    color: $font-color;
-    border: none;
-    padding: 10px 10px 10px 30px;
-  }
-
-  img {
-    height: 14px;
-    position: absolute;
-    top: 10px;
-    left: 10px;
-  }
-}
-
 .profile {
   display: flex;
   gap: 10px;
+  align-items: center;
 }
 
 .profile-photo {
@@ -106,51 +83,6 @@ main {
   font-size: 10px;
   margin: 0;
   padding-right: 5px;
-}
-
-.data-table {
-  border: 1px solid $accent-color;
-  border-radius: 10px;
-  padding: 0 17px;
-  width: 100%;
-  border-spacing: 0;
-}
-
-.bank-card {
-  height: 54px;
-  width: 88px;
-  border-radius: 10px;
-}
-
-td {
-  //line-height: 18px;
-  border-bottom: 1px solid $accent-color;
-  padding: 15px;
-  text-align: left;
-  vertical-align:middle;
-}
-
-tr:last-child {
-  td{
-    border-bottom: 0;
-  }
-}
-
-.heading {
-  font-size: 12px;
-  color: $font-color;
-  opacity: 50%;
-  margin: 0;
-}
-
-.column-data {
-  font-size: 14px;
-  font-weight: 700;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 150px;
-  display: inline-block;
 }
 
 .additional-info {
@@ -175,6 +107,7 @@ tr:last-child {
 .languages {
   font-size: 12px;
   margin: 0;
+  height: 23px;
 }
 
 .logout {
@@ -214,6 +147,7 @@ tr:last-child {
 
 .notification {
   position: relative;
+  top: 7px;
   top: 4px;
 }
 
@@ -222,35 +156,18 @@ tr:last-child {
   top: -8px;
   right: -4px;
   border-radius: 50%;
-  background-color: red;
+  background-color: $error-color;
   color: white;
   width: 14px;
   height: 14px;
   font-size: 9px;
   text-align: center;
-  line-height: 17px;
-}
-
-.secret-data {
-  display: flex;
-  margin: 0;
-  cursor: pointer;
-  position: relative;
-  gap: 10px;
-
-  img {
-    padding: 2px;
-    border-radius: 50%;
-    border: 1px solid;
-    height: 12px;
-    align-items: center;
-  }
+  line-height: 15px;
 }
 
 .options {
   width: fit-content;
 }
-
 
 li {
   list-style-type: none;

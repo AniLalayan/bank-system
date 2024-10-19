@@ -1,0 +1,46 @@
+{
+  "LOGIN": {
+    "TITLE": "Մուտք",
+    "SELECT_CODE": "Ընտրել կոդ",
+    "ENTER_MOBILE_NUMBER": "Մուտքագրեք մոբիլ հեռախոսահամարը",
+    "ENTER_PASSWORD": "Մուտքագրեք գաղտնաբառը",
+    "NEXT": "Հաջորդ",
+    "SUBMIT": "Ներկայացնել",
+    "ERROR": {
+      "INVALID_CODE_AND_NUMBER": "Խնդրում ենք մուտքագրել վավեր կոդ և համարը.",
+      "ALL_FIELDS_REQUIRED": "Բոլոր դաշտերը պարտադիր են:",
+      "NUMBER_MUST_BE_8_DIGITS": "Հեռախոսահամարը պետք է պարունակի 8 նիշ"
+    },
+    "TRANSACTIONS_MESSAGE_1": "Կատարեք",
+    "TRANSACTIONS_MESSAGE_2": "բոլոր գործարքները",
+    "TRANSACTIONS_MESSAGE_3": "առանց տնից դուրս գալու"
+  },
+  "SYSTEM": {
+    "HEADER": {
+      "SEARCH_PLACEHOLDER": "Որոնում",
+      "NOTIFICATIONS": "Ծանուցումներ",
+      "MESSAGES": "Հաղորդագրություններ",
+      "SETTINGS": "Կարգավորումներ",
+      "LOGOUT": "Ելք"
+    },
+    "MAIN": {
+      "BREADCRUMBS": {
+        "BREADCRUMB1": "Նավիգացիա1",
+        "BREADCRUMB2": "Նավիգացիա2",
+        "BREADCRUMB3": "Նավիգացիա3"
+      },
+      "TITLE": "Վերնագիր",
+      "SEARCH_PLACEHOLDER": "Որոնում",
+      "TABLE": {
+        "ACCOUNT_TYPE": "Հաշվի տեսակը",
+        "ACCOUNT_NUMBER": "Հաշվի համարը",
+        "CURRENCY": "Արժույթ",
+        "BALANCE": "Մնացորդ"
+      },
+      "ADDITIONAL_INFO": {
+        "HEADING": "ԼՐԱՑՈՒՑԻՉ ՏԵՂԵԿԱՏՎՈՒԹՅՈՒՆ",
+        "NO_DATA": "Տվյալներ չկան"
+      }
+    }
+  }
+}

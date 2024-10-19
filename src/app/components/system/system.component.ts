@@ -6,11 +6,14 @@ import {UserDataModel} from '../../shared/models/user-data.model';
 import {NgClass, UpperCasePipe} from '@angular/common';
 import {AuthService} from '../../shared/services/auth.service';
 import {headerMenuItems} from '../../shared/constants';
+import {LanguageSwitcherComponent} from '../../shared/components/language-switcher/language-switcher.component';
+import {TranslateModule} from '@ngx-translate/core';
+import {BankAccountsComponent} from '../bank-accounts/bank-accounts.component';
 
 @Component({
   selector: 'app-system',
   standalone: true,
-  imports: [UpperCasePipe, NgClass],
+  imports: [UpperCasePipe, NgClass, LanguageSwitcherComponent, TranslateModule, BankAccountsComponent],
   templateUrl: './system.component.html',
   styleUrl: './system.component.scss'
 })
@@ -21,13 +24,13 @@ export class SystemComponent implements OnInit {
   public additionalData!: {description: string};
   public transactions!: any;
 
-  showAccountNumbers: boolean[] = [];
-  showAccountBalances: boolean[] = [];
-  dropDownMenuIconUrl = 'assets/icons/custom-select/arrow-down-light.svg';
+  public dropDownMenuIconUrl = 'assets/icons/custom-select/arrow-down-light.svg';
   public isDropdownOpened = false;
   public headerMenuItems = headerMenuItems;
 
-  constructor(private apiService: ApiService, private router: Router, private authService: AuthService) {}
+  constructor(private apiService: ApiService,
+              private router: Router,
+              private authService: AuthService) {}
 
   public ngOnInit() {
     const token = localStorage.getItem('token');
@@ -44,9 +47,6 @@ export class SystemComponent implements OnInit {
       this.bankAccounts = results[1].result;
       this.additionalData = results[2].result;
       this.transactions = results[3].result;
-
-      this.bankAccounts?.forEach(() => this.showAccountNumbers.push(false));
-      this.bankAccounts?.forEach(() => this.showAccountBalances.push(false));
       this.handleErrors();
     });
   }
@@ -64,14 +64,6 @@ export class SystemComponent implements OnInit {
     // if (this.transactions?.error) {
     //   console.error(this.transactions.message);
     // }
-  }
-
-  toggleAccountNumberVisibility(index: number): void {
-    this.showAccountNumbers[index] = !this.showAccountNumbers[index];
-  }
-
-  toggleAccountBalanceVisibility(index: number): void {
-    this.showAccountBalances[index] = !this.showAccountBalances[index];
   }
 
   toggleDropdown() {

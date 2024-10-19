@@ -1,0 +1,42 @@
+@if (bankAccounts.length) {
+  <div class="search-bar">
+    <img src="../../../assets/icons/dark-search.svg" />
+    <input type="search" [placeholder]="'SYSTEM.MAIN.SEARCH_PLACEHOLDER' | translate">
+  </div>
+
+  <table class="data-table">
+    <tbody>
+      @for(bankAccount of bankAccounts; track bankAccount.accountNumber; let index=$index) {
+        <tr class="table-row">
+          <td style="width: 60px"><img src="../../../assets/bank-card.svg" class="bank-card"/></td>
+          <td style="width: 115px">
+            <p class="heading">{{ 'SYSTEM.MAIN.TABLE.ACCOUNT_TYPE' | translate }}</p>
+            <p class="column-data">{{bankAccount.accountType | uppercase}}</p>
+          </td>
+          <td style="width: 145px">
+            <p class="heading">{{ 'SYSTEM.MAIN.TABLE.ACCOUNT_NUMBER' | translate }}</p>
+            <div class="secret-data">
+              <p class="column-data">
+                {{showAccountNumbers[index] ? bankAccount.accountNumber : '****************'}}
+              </p>
+              <img src="../../../assets/icons/eye.svg" (click)="toggleAccountNumberVisibility(index)" />
+            </div>
+          </td>
+          <td style="width: 50px">
+            <p class="heading">{{ 'SYSTEM.MAIN.TABLE.CURRENCY' | translate }}</p>
+            <p class="column-data">{{bankAccount.currency}}</p>
+          </td>
+          <td style="width: 140px">
+            <p class="heading">{{ 'SYSTEM.MAIN.TABLE.BALANCE' | translate }}</p>
+            <div class="secret-data">
+              <p class="column-data">
+                {{showAccountBalances[index] ? bankAccount.balance : '. . . . . . .'}}
+              </p>
+              <img src="../../../assets/icons/eye.svg" (click)="toggleAccountBalanceVisibility(index)" />
+            </div>
+         </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+}

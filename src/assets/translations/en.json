@@ -1,0 +1,46 @@
+{
+  "LOGIN": {
+    "TITLE": "Log In",
+    "SELECT_CODE": "Select code",
+    "ENTER_MOBILE_NUMBER": "Enter mobile number",
+    "ENTER_PASSWORD": "Enter password",
+    "NEXT": "Next",
+    "SUBMIT": "Submit",
+    "ERROR": {
+      "INVALID_CODE_AND_NUMBER": "Please enter a valid code and number.",
+      "ALL_FIELDS_REQUIRED": "All fields are required.",
+      "NUMBER_MUST_BE_8_DIGITS": "Number must contain 8 digits."
+    },
+    "TRANSACTIONS_MESSAGE_1": "Make all transactions",
+    "TRANSACTIONS_MESSAGE_2": "without leaving",
+    "TRANSACTIONS_MESSAGE_3": "home"
+  },
+  "SYSTEM": {
+    "HEADER": {
+      "SEARCH_PLACEHOLDER": "Search",
+      "NOTIFICATIONS": "Notifications",
+      "MESSAGES": "Messages",
+      "SETTINGS": "Settings",
+      "LOGOUT": "Logout"
+    },
+    "MAIN": {
+      "BREADCRUMBS": {
+        "BREADCRUMB1": "Breadcrumb1",
+        "BREADCRUMB2": "Breadcrumb2",
+        "BREADCRUMB3": "Breadcrumb3"
+      },
+      "TITLE": "Title",
+      "SEARCH_PLACEHOLDER": "Search",
+      "TABLE": {
+        "ACCOUNT_TYPE": "Account type",
+        "ACCOUNT_NUMBER": "Account number",
+        "CURRENCY": "Currency",
+        "BALANCE": "Balance"
+      },
+      "ADDITIONAL_INFO": {
+        "HEADING": "ADDITIONAL INFO",
+        "NO_DATA": "No Data"
+      }
+    }
+  }
+}

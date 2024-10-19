@@ -1,0 +1,47 @@
+{
+  "LOGIN": {
+    "TITLE": "Войти",
+    "SELECT_CODE": "Выберите код",
+    "ENTER_MOBILE_NUMBER": "Введите номер мобильного телефона",
+    "ENTER_PASSWORD": "Введите пароль",
+    "NEXT": "Далее",
+    "SUBMIT": "Отправить",
+    "ERROR": {
+      "INVALID_CODE_AND_NUMBER": "Пожалуйста, введите действительный код и номер.",
+      "ALL_FIELDS_REQUIRED": "Все поля обязательны для заполнения.",
+      "NUMBER_MUST_BE_8_DIGITS": "Номер телефона должен быть составлен из 8 цифр"
+
+    },
+    "TRANSACTIONS_MESSAGE_1": "Совершайте",
+    "TRANSACTIONS_MESSAGE_2": "все транзакции,",
+    "TRANSACTIONS_MESSAGE_3": "не выходя из дома"
+  },
+  "SYSTEM": {
+    "HEADER": {
+      "SEARCH_PLACEHOLDER": "Поиск",
+      "NOTIFICATIONS": "Уведомления",
+      "MESSAGES": "Сообщения",
+      "SETTINGS": "Настройки",
+      "LOGOUT": "Выйти"
+    },
+    "MAIN": {
+      "BREADCRUMBS": {
+        "BREADCRUMB1": "Навигация1",
+        "BREADCRUMB2": "Навигация2",
+        "BREADCRUMB3": "Навигация3"
+      },
+      "TITLE": "Заголовок",
+      "SEARCH_PLACEHOLDER": "Поиск",
+      "TABLE": {
+        "ACCOUNT_TYPE": "Тип счета",
+        "ACCOUNT_NUMBER": "Номер счета",
+        "CURRENCY": "Валюта",
+        "BALANCE": "Баланс"
+      },
+      "ADDITIONAL_INFO": {
+        "HEADING": "ДОПОЛНИТЕЛЬНАЯ ИНФОРМАЦИЯ",
+        "NO_DATA": "Нет данных"
+      }
+    }
+  }
+}

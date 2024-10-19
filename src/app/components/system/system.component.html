@@ -7,109 +7,78 @@
     <div class="user-info">
       <div style="position: relative">
         <img src="../../../assets/icons/search.svg" alt="IDBusiness" class="search-icon">
-        <input type="text" class="search-input" placeholder="Search"/>
+        <input type="text" class="search-input" [placeholder]="'SYSTEM.HEADER.SEARCH_PLACEHOLDER' | translate"/>
       </div>
-      <div class="profile">
-        <div class="user-name-group">
-          <p class="user-name">{{userData!.firstName}} {{userData!.lastName}}</p>
-          <div>
-            <span class="passport">{{userData!.passportNumber}}</span>
-            <img [src]="dropDownMenuIconUrl" class="arrow" (click)="toggleDropdown()" />
 
-            @if(isDropdownOpened) {
-            <ul class="options" >
-              <img src="assets/icons/custom-select/close.svg" class="close-button"
-                   (click)="toggleDropdown()"/>
-              @for(item of headerMenuItems; track item.companyName; let index=$index) {
-                <li [ngClass]="{ 'selected-item': index == 0}">
-                  <span class="country-code"> {{ item.companyName }} </span>
-                  <span class="country-name">{{ item.position }}</span>
-                </li>
+      <div class="profile">
+        @if (userData) {
+          <div class="user-name-group">
+            <p class="user-name">{{userData!.firstName}} {{userData!.lastName}}</p>
+            <div>
+              <span class="passport">{{userData!.passportNumber}}</span>
+              <img [src]="dropDownMenuIconUrl" class="arrow" (click)="toggleDropdown()" />
+
+              @if(isDropdownOpened) {
+                <ul class="options" >
+                  <img src="assets/icons/custom-select/close.svg" class="close-button" (click)="toggleDropdown()"/>
+                  @for(item of headerMenuItems; track item.companyName; let index=$index) {
+                    <li [ngClass]="{ 'selected-item': index == 0}">
+                      <span class="country-code"> {{ item.companyName }} </span>
+                      <span class="country-name">{{ item.position }}</span>
+                    </li>
+                  }
+                </ul>
               }
-            </ul>
-            }
+            </div>
           </div>
-        </div>
+        }
+
         <img src="../../../assets/profile-photo.jpg" alt="Profile Picture" class="profile-photo">
+
+        <div class="notification">
+          <img src="../../../assets/icons/bell.svg" />
+          <div class="badge">3</div>
+        </div>
+
+        <div class="notification">
+          <img src="../../../assets/icons/mail.svg" />
+          <div class="badge">3</div>
+        </div>
+
+        <img src="../../../assets/icons/settings.svg" />
+
+        <app-language-switcher class="languages"></app-language-switcher>
+
+        <img src="../../../assets/icons/logout.svg" class="logout" (click)="logout()" />
       </div>
-      <div class="notification">
-        <img src="../../../assets/icons/bell.svg" />
-        <div class="badge">3</div>
-      </div>
-      <div class="notification">
-        <img src="../../../assets/icons/mail.svg" />
-        <div class="badge">3</div>
-      </div>
-      <img src="../../../assets/icons/settings.svg" />
-      <p class="languages">ENG | РУ | ՀԱՅ</p>
-      <img src="../../../assets/icons/logout.svg" class="logout" (click)="logout()" />
     </div>
   </div>
 </header>
 
 <main>
   <div class="breadcrumb">
-    <a href="#">Breadcrumb1</a>
+    <a href="#">{{ 'SYSTEM.MAIN.BREADCRUMBS.BREADCRUMB1' | translate }}</a>
     <img src="../../../assets/icons/arrow-right.svg" />
-    <a href="#">Breadcrumb2</a>
+    <a href="#">{{ 'SYSTEM.MAIN.BREADCRUMBS.BREADCRUMB2' | translate }}</a>
     <img src="../../../assets/icons/arrow-right.svg" />
-    <a href="#" style="font-weight: 700">Breadcrumb3</a>
+    <a href="#" style="font-weight: 700">{{ 'SYSTEM.MAIN.BREADCRUMBS.BREADCRUMB3' | translate }}</a>
   </div>
 
   <div class="container">
-    <p class="title">Title</p>
-    <div class="search-bar">
-      <img src="../../../assets/icons/dark-search.svg" />
-      <input type="search" placeholder="Search">
-    </div>
+    <p class="title">{{ 'SYSTEM.MAIN.TITLE' | translate }}</p>
 
-    <table class="data-table">
-      <tbody>
-      @for(bankAccount of bankAccounts; track bankAccount.accountNumber; let index=$index) {
-        <tr class="table-row">
-          <td style="width: 60px"><img src="../../../assets/bank-card.svg" class="bank-card"/></td>
-          <td style="width: 115px">
-            <p class="heading">Account type</p>
-            <p class="column-data">{{bankAccount.accountType | uppercase}}</p>
-          </td>
-          <td style="width: 145px">
-            <p class="heading">Account number</p>
-            <div class="secret-data">
-              <p class="column-data">
-                {{showAccountNumbers[index] ? bankAccount.accountNumber : '****************'}}
-              </p>
-              <img src="../../../assets/icons/eye.svg" (click)="toggleAccountNumberVisibility(index)" />
-            </div>
-          </td>
-          <td style="width: 50px">
-            <p class="heading">Currency</p>
-            <p class="column-data">{{bankAccount.currency}}</p>
-          </td>
-          <td style="width: 140px">
-            <p class="heading">Balance</p>
-            <div class="secret-data">
-              <p class="column-data">
-                {{showAccountBalances[index] ? bankAccount.balance : '. . . . . . .'}}
-              </p>
-              <img src="../../../assets/icons/eye.svg" (click)="toggleAccountBalanceVisibility(index)" />
-            </div>
-          </td>
-        </tr>
-      }
-      </tbody>
-    </table>
+    <app-bank-accounts [bankAccounts]="bankAccounts"></app-bank-accounts>
 
     <div class="additional-info">
       <div class="heading">
-        <p class="additional-info-heading">ADDITIONAL INFO</p>
+        <p class="additional-info-heading">{{ 'SYSTEM.MAIN.ADDITIONAL_INFO.HEADING' | translate }}</p>
       </div>
+
       @if (additionalData) {
         <p class="additional-info-content">{{additionalData.description}}</p>
       } @else {
-        <p class="additional-info-content">No Data</p>
+        <p class="additional-info-content">{{ 'SYSTEM.MAIN.ADDITIONAL_INFO.NO_DATA' | translate }}</p>
       }
     </div>
   </div>
 </main>
-
-

@@ -1,66 +1,74 @@
 <div class="container">
-
   <div class="main-section">
     <div class="logo-container">
       <img src="assets/main-logo.png" alt="ID logo"/>
-        <p class="text">Make all transactions<br>without leaving<br>home<br></p>
+      <p class="text">{{'LOGIN.TRANSACTIONS_MESSAGE_1' | translate}}
+        <br>{{'LOGIN.TRANSACTIONS_MESSAGE_2' | translate}}
+        <br>{{'LOGIN.TRANSACTIONS_MESSAGE_3' | translate}}<br>
+      </p>
     </div>
   </div>
 
   <div class="login-section">
-    <p class="languages">ENG | РУ | ՀԱՅ</p>
-      <form class="login-form" [formGroup]="form" (ngSubmit)="submit()">
-        <p>LOG IN</p>
-        <div class="form-container">
-          <div class="phone-check-section">
-            <div class="form-item">
-              <label for="code" class="form-label">Select code</label>
-              <div style="position: relative">
-                <img [src]="selectBoxIconUrl" class="arrow" (click)="openCloseSelectBox()"/>
-                <input type="text" formControlName="code" class="dropdown"/>
+    <app-language-switcher class="languages"></app-language-switcher>
+    <form class="login-form" [formGroup]="form" (ngSubmit)="submit()">
+      <p>{{ 'LOGIN.TITLE' | translate }}</p>
+      <div class="form-container">
+        <div class="phone-check-section">
+          <div class="form-item">
+            <label for="code" class="form-label">{{ 'LOGIN.SELECT_CODE' | translate }}</label>
+            <div style="position: relative">
+              <img [src]="selectBoxIconUrl" class="arrow" (click)="openCloseSelectBox()"/>
+              <input type="text" formControlName="code" class="dropdown"/>
 
-                @if(isSelectBoxOpened) {
-                  <ul class="options" >
-                    <img src="assets/icons/custom-select/close.svg" class="close-button"
-                         (click)="openCloseSelectBox()"/>
-                    @for(item of countryCodes; track item.countryCode; let index=$index) {
-                      <li [value]="item.countryCode"
-                          (click)="selectItem(item)"
-                          [ngClass]="{ 'selected-item': selectedItemIndex == index}">
-                        <span class="country-code"> +{{ item.countryCode }} </span>
-                        <span class="country-name">{{ item.countryName }}</span>
-                      </li>
-                    }
-                  </ul>
-                }
-              </div>
-            </div>
-
-            <div class="form-item">
-              <label for="number" class="form-label">Enter mobile number</label>
-              <input type="number" formControlName="number" class="username"/>
+              @if (isSelectBoxOpened) {
+                <ul class="options">
+                  <img src="assets/icons/custom-select/close.svg" class="close-button" (click)="openCloseSelectBox()"/>
+                  @for(item of countryCodes; track item.countryCode; let index=$index) {
+                    <li (click)="selectItem(item)"
+                        [ngClass]="{ 'selected-item': selectedItemIndex == index}">
+                      <span class="country-code"> +{{ item.countryCode }} </span>
+                      <span class="country-name">{{ item.countryName }}</span>
+                    </li>
+                  }
+                </ul>
+              }
             </div>
           </div>
 
-          @if (isPhoneChecked) {
-            <div class="form-item">
-             <label for="password" class="form-label">Enter password</label>
-             <input type="password" formControlName="password" class="password"/>
-            </div>
-          }
-
-          <div *ngIf="isButtonClicked && form.invalid && form.touched && !isPhoneChecked"
-               class="error">
-            Please enter a valid code and number.
+          <div class="form-item">
+            <label for="number" class="form-label">{{ 'LOGIN.ENTER_MOBILE_NUMBER' | translate }}</label>
+            <input type="number" formControlName="number" class="username"/>
           </div>
-          <div *ngIf="isButtonClicked && form.invalid && form.touched && isPhoneChecked"
-               class="error">
-            All fields are required.
-          </div>
-
-          <button class="submit-button">{{!isPhoneChecked ? 'Next' : 'Submit'}}</button>
-
         </div>
-      </form>
+
+        @if (isPhoneChecked) {
+          <div class="form-item">
+            <label for="password" class="form-label">{{ 'LOGIN.ENTER_PASSWORD' | translate }}</label>
+            <input type="password" formControlName="password" class="password"/>
+          </div>
+        }
+
+        @if (isButtonClicked && form.invalid && form.touched && !isPhoneChecked) {
+          <div class="error">
+            {{ 'LOGIN.ERROR.INVALID_CODE_AND_NUMBER' | translate }}
+          </div>
+        }
+
+        @if (isButtonClicked && form.invalid && form.touched && form.controls['number'].hasError('pattern')) {
+          <div class="error">
+            {{ 'LOGIN.ERROR.NUMBER_MUST_BE_8_DIGITS' | translate }}
+          </div>
+        }
+
+        @if (isButtonClicked && form.invalid && form.touched && isPhoneChecked) {
+          <div class="error">
+            {{ 'LOGIN.ERROR.ALL_FIELDS_REQUIRED' | translate }}
+          </div>
+        }
+        <button class="submit-button">{{ !isPhoneChecked ? ('LOGIN.NEXT' | translate) : ('LOGIN.SUBMIT' | translate) }}</button>
+
+      </div>
+    </form>
   </div>
 </div>

@@ -6,11 +6,13 @@ import {ResponseModel} from '../../shared/models/response.model';
 import {CountryCodeModel} from '../../shared/models/country-code.model';
 import {Router} from '@angular/router';
 import {SUCCESS_MESSAGE} from '../../shared/constants';
+import {LanguageSwitcherComponent} from '../../shared/components/language-switcher/language-switcher.component';
+import {TranslateModule, TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ FormsModule, ReactiveFormsModule, NgFor, NgIf, NgClass],
+  imports: [FormsModule, ReactiveFormsModule, NgClass, LanguageSwitcherComponent, TranslateModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
@@ -27,10 +29,11 @@ export class LoginComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private apiService: ApiService,
-              private router: Router) {
+              private router: Router,
+              private translate: TranslateService) {
     this.form = this.formBuilder.group({
       code: ['+374', Validators.required],
-      number: [null, Validators.required],
+      number: [null, [Validators.required, Validators.pattern(/^\d{8}$/)]],
       password: ['', Validators.required]
     })
   }

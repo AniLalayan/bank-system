@@ -1,0 +1,15 @@
+@import "../../../../variables";
+
+.button-group {
+  display: flex;
+  margin-bottom: 0;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.button-group {
+  p {
+    margin-bottom: 0;
+  }
+}
