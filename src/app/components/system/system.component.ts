@@ -35,7 +35,7 @@ export class SystemComponent implements OnInit, OnDestroy {
     if (token) {
       this.fetchData(token);
     } else {
-      this.router.navigateByUrl('/login');
+      this.authService.logout();
     }
   }
 

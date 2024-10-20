@@ -20,19 +20,9 @@ import {DropdownComponent} from '../../shared/components/dropdown/dropdown.compo
 export class HeaderComponent {
 
   @Input() public userData!: UserDataModel;
-  public dropDownMenuIconUrl = 'assets/icons/custom-select/arrow-down-light.svg';
-  public isDropdownOpened = false;
   public headerMenuItems = headerMenuItems;
 
-  constructor(private apiService: ApiService,
-              private router: Router,
-              private authService: AuthService) {}
-
-
-  toggleDropdown() {
-    this.isDropdownOpened = !this.isDropdownOpened;
-    this.dropDownMenuIconUrl = this.isDropdownOpened ? 'assets/icons/custom-select/arrow-up-light.svg' : 'assets/icons/custom-select/arrow-down-light.svg';
-  }
+  constructor(private authService: AuthService) {}
 
   public logout() {
     this.authService.logout();

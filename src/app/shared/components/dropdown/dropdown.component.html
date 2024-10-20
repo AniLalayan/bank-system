@@ -4,10 +4,13 @@
          [value]="selectedItemLabel"
          [placeholder]="placeholder" readonly />
 
-  <img [src]="iconUrl"
-       [class]="passportDropdownArrowClassName"
-       [class.rotated]="isDropdownOpened"
-       (click)="toggleDropdown()" />
+  <button [disabled]="isDropdownDisabled" (click)="toggleDropdown()" class="toggle-button" type="button">
+    <img [src]="iconUrl"
+         [class]="passportDropdownArrowClassName"
+         [class.rotated]="isDropdownOpened"
+          />
+  </button>
+
 
   @if (isDropdownOpened) {
     <ul class="options" [ngClass]="dropdownOptionsClassName">

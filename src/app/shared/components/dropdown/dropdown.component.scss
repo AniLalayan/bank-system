@@ -83,7 +83,7 @@
 
 .passport-dropdown-options {
   max-width: 248px;
-  padding-top: 29px;
+  padding-top: 35px;
   position: absolute;
   right: -40px;
 }
@@ -109,3 +109,8 @@
   width: 100%;
 }
 
+.toggle-button {
+  border: none;
+  background-color: transparent;
+  padding: 0;
+}

@@ -25,7 +25,8 @@
               [selectedItemLabel]="form.controls['code'].value"
               [selectedItemIndex]="selectedItemIndex"
               (itemSelected)="onItemSelected($event)"
-              [passportDropdownArrowClassName]="'arrow'">
+              [passportDropdownArrowClassName]="'arrow'"
+              [isDropdownDisabled]="isDropdownDisabled">
             </app-dropdown>
           </div>
 

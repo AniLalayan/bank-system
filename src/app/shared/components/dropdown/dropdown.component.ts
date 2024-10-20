@@ -1,5 +1,5 @@
-import {Component, Input, Output, EventEmitter, OnInit} from '@angular/core';
-import {NgClass, NgFor, NgIf} from '@angular/common';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, Output} from '@angular/core';
+import {NgClass} from '@angular/common';
 import {ClickOutsideDirective} from '../../directives/click-outside.directive';
 
 @Component({
@@ -7,9 +7,10 @@ import {ClickOutsideDirective} from '../../directives/click-outside.directive';
   standalone: true,
   imports: [NgClass, ClickOutsideDirective],
   templateUrl: './dropdown.component.html',
-  styleUrls: ['./dropdown.component.scss']
+  styleUrls: ['./dropdown.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DropdownComponent implements OnInit {
+export class DropdownComponent {
   @Input() items: any[] = [];
   @Input() selectedItemIndex: number = 0;
   @Input() iconUrl!: string;
@@ -18,11 +19,12 @@ export class DropdownComponent implements OnInit {
   @Input() inputClassName: string = '';
   @Input() dropdownOptionsClassName!: string;
   @Input() passportDropdownArrowClassName!: string;
+  @Input() isDropdownDisabled!: boolean;
 
   @Output() itemSelected = new EventEmitter<any>();
   public isDropdownOpened = false;
 
-  public ngOnInit() {
+  constructor(private cdr: ChangeDetectorRef) {
   }
 
   public toggleDropdown(): void {

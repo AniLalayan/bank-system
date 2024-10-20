@@ -30,6 +30,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   public isSelectBoxOpened = false
   public showValidationMessages = false;
   public requestErrorMessage = '';
+  public isDropdownDisabled = false;
   private destroy$ = new Subject<void>();
 
   constructor(private formBuilder: FormBuilder,
@@ -75,6 +76,8 @@ export class LoginComponent implements OnInit, OnDestroy {
         if (response.message === SUCCESS_MESSAGE) {
           this.isPhoneChecked = true;
           this.form.controls['number'].disable();
+          this.form.controls['code'].disable();
+          this.isDropdownDisabled = true;
           this.requestErrorMessage = '';
         }
       },

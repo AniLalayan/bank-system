@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
 import {BankAccountModel} from '../../shared/models/bank-account.model';
 import {TranslateModule} from '@ngx-translate/core';
 import {UpperCasePipe} from '@angular/common';
