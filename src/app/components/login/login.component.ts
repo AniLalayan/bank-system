@@ -8,11 +8,12 @@ import {Router} from '@angular/router';
 import {SUCCESS_MESSAGE} from '../../shared/constants';
 import {LanguageSwitcherComponent} from '../../shared/components/language-switcher/language-switcher.component';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
+import {ClickOutsideDirective} from '../../shared/directives/click-outside.directive';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, NgClass, LanguageSwitcherComponent, TranslateModule],
+  imports: [FormsModule, ReactiveFormsModule, NgClass, LanguageSwitcherComponent, TranslateModule, ClickOutsideDirective],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
@@ -24,8 +25,9 @@ export class LoginComponent implements OnInit {
   public selectedItemIndex: number = 0;
   public isPhoneChecked = false;
   public isSelectBoxOpened = false
-  public selectBoxIconUrl = 'assets/icons/custom-select/arrow-down-light.svg'
+  public selectBoxIconUrl = 'assets/icons/custom-select/arrow-down.svg'
   public isButtonClicked = false;
+  public requestErrorMessage = '';
 
   constructor(private formBuilder: FormBuilder,
               private apiService: ApiService,
@@ -73,6 +75,7 @@ export class LoginComponent implements OnInit {
       next: (response: ResponseModel<CountryCodeModel[]>) => {
         if (response.message === SUCCESS_MESSAGE) {
           this.isPhoneChecked = true;
+          this.form.controls['number'].disable();
         }
       },
       error: err => {
@@ -94,7 +97,7 @@ export class LoginComponent implements OnInit {
   }
 
   private checkFormValidation() {
-    if(!this.isPhoneChecked) {
+    if (!this.isPhoneChecked) {
       this.form.controls['password'].clearValidators();
       this.form.controls['password'].updateValueAndValidity();
       if (this.form.controls['code'].invalid || this.form.controls['number'].invalid) {
@@ -118,7 +121,7 @@ export class LoginComponent implements OnInit {
     }
     this.isSelectBoxOpened = !this.isSelectBoxOpened;
     this.selectBoxIconUrl = this.isSelectBoxOpened ? 'assets/icons/custom-select/arrow-up.svg'
-      : 'assets/icons/custom-select/arrow-down-light.svg'
+      : 'assets/icons/custom-select/arrow-down.svg'
   }
 
   public selectItem(countryCode: CountryCodeModel) {
@@ -129,5 +132,12 @@ export class LoginComponent implements OnInit {
   public getSelectedItemIndex() {
     const value = parseInt(this.form.controls['code'].value);
     this.selectedItemIndex = this.countryCodes.findIndex((item: CountryCodeModel) => item.countryCode === value);
+  }
+
+  public closeSelectBox(): void {
+    if (this.isSelectBoxOpened) {
+      this.isSelectBoxOpened = false;
+      this.selectBoxIconUrl = 'assets/icons/custom-select/arrow-down.svg';
+    }
   }
 }

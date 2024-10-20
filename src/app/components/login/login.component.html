@@ -17,7 +17,7 @@
         <div class="phone-check-section">
           <div class="form-item">
             <label for="code" class="form-label">{{ 'LOGIN.SELECT_CODE' | translate }}</label>
-            <div style="position: relative">
+            <div style="position: relative" appClickOutside (clickOutside)="closeSelectBox()">
               <img [src]="selectBoxIconUrl" class="arrow" (click)="openCloseSelectBox()"/>
               <input type="text" formControlName="code" class="dropdown"/>
 
@@ -25,10 +25,10 @@
                 <ul class="options">
                   <img src="assets/icons/custom-select/close.svg" class="close-button" (click)="openCloseSelectBox()"/>
                   @for(item of countryCodes; track item.countryCode; let index=$index) {
-                    <li (click)="selectItem(item)"
+                    <li (click)="selectItem(item)" class="dropdown-item"
                         [ngClass]="{ 'selected-item': selectedItemIndex == index}">
-                      <span class="country-code"> +{{ item.countryCode }} </span>
-                      <span class="country-name">{{ item.countryName }}</span>
+                      <span class="country-code dropdown-item-content"> +{{ item.countryCode }} </span>
+                      <span class="country-name dropdown-item-content">{{ item.countryName }}</span>
                     </li>
                   }
                 </ul>
@@ -49,23 +49,25 @@
           </div>
         }
 
-        @if (isButtonClicked && form.invalid && form.touched && !isPhoneChecked) {
-          <div class="error">
-            {{ 'LOGIN.ERROR.INVALID_CODE_AND_NUMBER' | translate }}
-          </div>
-        }
+        <div class="errors-group">
+          @if (isButtonClicked && form.invalid && form.touched && !isPhoneChecked) {
+            <div class="error">
+              {{ 'LOGIN.ERROR.INVALID_CODE_AND_NUMBER' | translate }}
+            </div>
+          }
 
-        @if (isButtonClicked && form.invalid && form.touched && form.controls['number'].hasError('pattern')) {
-          <div class="error">
-            {{ 'LOGIN.ERROR.NUMBER_MUST_BE_8_DIGITS' | translate }}
-          </div>
-        }
+          @if (isButtonClicked && form.controls['number'].invalid && form.controls['number'].hasError('pattern')) {
+            <div class="error">
+              {{ 'LOGIN.ERROR.NUMBER_MUST_BE_8_DIGITS' | translate }}
+            </div>
+          }
 
-        @if (isButtonClicked && form.invalid && form.touched && isPhoneChecked) {
-          <div class="error">
-            {{ 'LOGIN.ERROR.ALL_FIELDS_REQUIRED' | translate }}
-          </div>
-        }
+          @if (isButtonClicked && form.invalid && form.touched && isPhoneChecked) {
+            <div class="error">
+              {{ 'LOGIN.ERROR.ALL_FIELDS_REQUIRED' | translate }}
+            </div>
+          }
+        </div>
         <button class="submit-button">{{ !isPhoneChecked ? ('LOGIN.NEXT' | translate) : ('LOGIN.SUBMIT' | translate) }}</button>
 
       </div>

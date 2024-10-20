@@ -9,11 +9,12 @@ import {headerMenuItems} from '../../shared/constants';
 import {LanguageSwitcherComponent} from '../../shared/components/language-switcher/language-switcher.component';
 import {TranslateModule} from '@ngx-translate/core';
 import {BankAccountsComponent} from '../bank-accounts/bank-accounts.component';
+import {ClickOutsideDirective} from '../../shared/directives/click-outside.directive';
 
 @Component({
   selector: 'app-system',
   standalone: true,
-  imports: [UpperCasePipe, NgClass, LanguageSwitcherComponent, TranslateModule, BankAccountsComponent],
+  imports: [UpperCasePipe, NgClass, LanguageSwitcherComponent, TranslateModule, BankAccountsComponent, ClickOutsideDirective],
   templateUrl: './system.component.html',
   styleUrl: './system.component.scss'
 })
@@ -73,6 +74,13 @@ export class SystemComponent implements OnInit {
 
   public logout() {
     this.authService.logout();
+  }
+
+  public closeSelectBox(): void {
+    if (this.isDropdownOpened) {
+      this.isDropdownOpened = false;
+      this.dropDownMenuIconUrl = 'assets/icons/custom-select/arrow-down-light.svg';
+    }
   }
 
 }

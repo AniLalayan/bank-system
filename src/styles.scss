@@ -26,7 +26,7 @@ select:focus {
   0px -1.5px 0px 0px rgba(255, 255, 255, 0.25) inset,
   0px -0.5px 0px 0px rgba(0, 0, 0, 0.2) inset;
   backdrop-filter: blur(70px);
-  border-radius: 15px;
+  border-radius: 15px 0 0 15px;
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.3) 100%);
 }
 
@@ -34,7 +34,7 @@ select:focus {
   width: 10px;
   padding: 5px;
   float: right;
-  margin: 11px;
+  margin: 3px;
   background-color: rgb(0,0,0,20%);;
   border-radius: 15px;
   display: block;
@@ -44,3 +44,23 @@ select:focus {
   right: 8px;
 }
 
+.dropdown-item {
+  list-style-type: none;
+  padding: 0 22px;
+  display: flex;
+  gap: 22px;
+  color: $font-color-dark;
+}
+
+.dropdown-item:hover, selected-item {
+  background-color: rgba(77, 77, 77, 0.5);
+  color: white;
+  font-weight: 400;
+}
+
+.dropdown-item-content {
+  font-size: 14px;
+  border-bottom: 1px solid;
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
