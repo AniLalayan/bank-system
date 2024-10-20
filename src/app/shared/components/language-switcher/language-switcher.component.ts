@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import {LanguageService} from '../../services/language.service';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 
 @Component({
@@ -7,8 +6,10 @@ import {TranslateService} from '@ngx-translate/core';
   standalone: true,
   imports: [],
   templateUrl: './language-switcher.component.html',
-  styleUrl: './language-switcher.component.scss'
+  styleUrl: './language-switcher.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
+
 export class LanguageSwitcherComponent {
   constructor(private translate: TranslateService) {}
 

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import {ApiService} from '../../shared/services/api.service';
 import {Router} from '@angular/router';
 import {BankAccountModel} from '../../shared/models/bank-account.model';
@@ -10,20 +10,23 @@ import {LanguageSwitcherComponent} from '../../shared/components/language-switch
 import {TranslateModule} from '@ngx-translate/core';
 import {BankAccountsComponent} from '../bank-accounts/bank-accounts.component';
 import {ClickOutsideDirective} from '../../shared/directives/click-outside.directive';
+import {Subject, takeUntil, throwError} from 'rxjs';
 
 @Component({
   selector: 'app-system',
   standalone: true,
   imports: [UpperCasePipe, NgClass, LanguageSwitcherComponent, TranslateModule, BankAccountsComponent, ClickOutsideDirective],
   templateUrl: './system.component.html',
-  styleUrl: './system.component.scss'
+  styleUrl: './system.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SystemComponent implements OnInit {
+export class SystemComponent implements OnInit, OnDestroy {
 
   public userData!: UserDataModel;
   public bankAccounts: BankAccountModel[] = [];
-  public additionalData!: {description: string};
+  public additionalData!: any;
   public transactions!: any;
+  private destroy$ = new Subject<void>();
 
   public dropDownMenuIconUrl = 'assets/icons/custom-select/arrow-down-light.svg';
   public isDropdownOpened = false;
@@ -31,7 +34,8 @@ export class SystemComponent implements OnInit {
 
   constructor(private apiService: ApiService,
               private router: Router,
-              private authService: AuthService) {}
+              private authService: AuthService,
+              private cdr: ChangeDetectorRef) {}
 
   public ngOnInit() {
     const token = localStorage.getItem('token');
@@ -43,28 +47,18 @@ export class SystemComponent implements OnInit {
   }
 
   public fetchData(token: string) {
-    this.apiService.fetchAllData(token).subscribe(results => {
-      this.userData = results[0].result;
-      this.bankAccounts = results[1].result;
-      this.additionalData = results[2].result;
-      this.transactions = results[3].result;
-      this.handleErrors();
+    this.apiService.fetchAllData(token).pipe(
+      takeUntil(this.destroy$))
+      .subscribe( {
+      next: results => {
+        this.userData = results[0].result;
+        this.bankAccounts = results[1].result;
+        this.additionalData = results[2].result;
+        this.transactions = results[3].result;
+        this.cdr.detectChanges();
+      },
+      error: err => throwError(err)
     });
-  }
-
-  private handleErrors() {
-    // if (this.userData?.error) {
-    //   console.error(this.userData.message);
-    // }
-    // if (this.bankAccounts?.error) {
-    //   console.error(this.bankAccounts.message);
-    // }
-    // if (this.additionalData?.error) {
-    //   console.error(this.additionalData.message);
-    // }
-    // if (this.transactions?.error) {
-    //   console.error(this.transactions.message);
-    // }
   }
 
   toggleDropdown() {
@@ -81,6 +75,11 @@ export class SystemComponent implements OnInit {
       this.isDropdownOpened = false;
       this.dropDownMenuIconUrl = 'assets/icons/custom-select/arrow-down-light.svg';
     }
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
 }

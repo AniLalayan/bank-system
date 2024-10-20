@@ -4,7 +4,7 @@ import { HttpClient, provideHttpClient, withInterceptors, withInterceptorsFromDi
 
 import { routes } from './app.routes';
 import { loadingInterceptor } from './shared/interceptors/loading.interceptor';
-import {TranslateLoader, TranslateModule, TranslateService, TranslateStore} from '@ngx-translate/core';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 export function HttpLoaderFactory(http: HttpClient) {

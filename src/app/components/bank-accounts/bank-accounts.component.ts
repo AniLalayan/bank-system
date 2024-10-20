@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
 import {BankAccountModel} from '../../shared/models/bank-account.model';
 import {TranslateModule} from '@ngx-translate/core';
 import {UpperCasePipe} from '@angular/common';
@@ -8,7 +8,8 @@ import {UpperCasePipe} from '@angular/common';
   standalone: true,
   imports: [TranslateModule, UpperCasePipe],
   templateUrl: './bank-accounts.component.html',
-  styleUrl: './bank-accounts.component.scss'
+  styleUrl: './bank-accounts.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BankAccountsComponent implements OnInit {
 

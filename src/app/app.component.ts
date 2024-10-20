@@ -1,5 +1,5 @@
-import {ChangeDetectorRef, Component} from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {RouterOutlet} from '@angular/router';
 import {LoginComponent} from './components/login/login.component';
 import {Observable} from 'rxjs';
 import {LoadingService} from './shared/services/loading.service';
@@ -11,19 +11,24 @@ import {TranslateService} from '@ngx-translate/core';
   standalone: true,
   imports: [RouterOutlet, LoginComponent, AsyncPipe],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'bank-system';
-  loading$: Observable<boolean>;
+  loading$!: Observable<boolean>;
 
   constructor(private loadingService: LoadingService,
               private cdr: ChangeDetectorRef,
-              private translate: TranslateService) {
+              private translate: TranslateService,) {
+  }
+
+  public ngOnInit() {
     this.loading$ = this.loadingService.loading$;
-    const browserLang = translate.getBrowserLang() ?? '';
+    const browserLang = this.translate.getBrowserLang() ?? '';
     const lang = localStorage.getItem('lang') || browserLang;
-    translate.setDefaultLang(lang);
-    translate.use(lang);
+    this.translate.setDefaultLang(lang);
+    this.translate.use(lang);
+    this.cdr.detectChanges();
   }
 }

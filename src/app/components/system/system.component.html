@@ -22,7 +22,7 @@
                 <ul class="options" appClickOutside (clickOutside)="closeSelectBox()">
                   <img src="assets/icons/custom-select/close.svg" class="close-button" (click)="toggleDropdown()"/>
                   @for(item of headerMenuItems; track item.companyName; let index=$index) {
-                    <li [ngClass]="{ 'selected-item': index == 0}" class="dropdown-item">
+                    <li [ngClass]="{ 'selected-item': index == 1}" class="dropdown-item">
                       <span class="dropdown-item-content"> {{ item.companyName }} </span>
                       <span class="dropdown-item-content">{{ item.position }}</span>
                     </li>

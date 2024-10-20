@@ -50,21 +50,29 @@
         }
 
         <div class="errors-group">
-          @if (isButtonClicked && form.invalid && form.touched && !isPhoneChecked) {
-            <div class="error">
-              {{ 'LOGIN.ERROR.INVALID_CODE_AND_NUMBER' | translate }}
-            </div>
+          @if (showValidationMessages && form.invalid && form.touched) {
+            @if (!isPhoneChecked) {
+              <div class="error">
+                {{ 'LOGIN.ERROR.INVALID_CODE_AND_NUMBER' | translate }}
+              </div>
+            }
+
+            @if (isPhoneChecked) {
+              <div class="error">
+                {{ 'LOGIN.ERROR.ALL_FIELDS_REQUIRED' | translate }}
+              </div>
+            }
+
+            @if (form.controls['number'].invalid && form.controls['number'].hasError('pattern')) {
+              <div class="error">
+                {{ 'LOGIN.ERROR.NUMBER_MUST_BE_8_DIGITS' | translate }}
+              </div>
+            }
           }
 
-          @if (isButtonClicked && form.controls['number'].invalid && form.controls['number'].hasError('pattern')) {
+          @if (requestErrorMessage) {
             <div class="error">
-              {{ 'LOGIN.ERROR.NUMBER_MUST_BE_8_DIGITS' | translate }}
-            </div>
-          }
-
-          @if (isButtonClicked && form.invalid && form.touched && isPhoneChecked) {
-            <div class="error">
-              {{ 'LOGIN.ERROR.ALL_FIELDS_REQUIRED' | translate }}
+              {{ requestErrorMessage | translate }}
             </div>
           }
         </div>
