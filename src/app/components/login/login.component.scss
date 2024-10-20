@@ -73,15 +73,6 @@
   margin-bottom: 5px;
 }
 
-.dropdown {
-  width: 111px;
-  border-radius: 10px 0 0 10px;
-  border: 1px solid $main-dark-color;
-  padding: 10px;
-  font-size: 16px;
-  cursor: pointer;
-}
-
 .form-item {
   display: flex;
   flex-direction: column;
@@ -130,25 +121,6 @@
   border: 1px solid $main-dark-color;
   font-size: 16px;
   cursor: pointer;
-}
-
-.arrow {
-  position: absolute;
-  padding: 8px 6px;
-  background-color: rgb(0,0,0,20%);
-  border-radius: 50%;
-  top: 9px;
-  right: 10px;
-  cursor: pointer;
-}
-
-.country-code {
-  font-weight: 700;
-  width: 60px;
-}
-
-.country-name {
-  width: 100%;
 }
 
 .error {

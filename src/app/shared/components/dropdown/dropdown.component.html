@@ -1,0 +1,38 @@
+<div style="position: relative" appClickOutside (clickOutside)="closeDropdown()">
+  <input type="text"
+         [class]="inputClassName"
+         [value]="selectedItemLabel"
+         [placeholder]="placeholder" readonly />
+
+  <img [src]="iconUrl"
+       [class]="passportDropdownArrowClassName"
+       [class.rotated]="isDropdownOpened"
+       (click)="toggleDropdown()" />
+
+  @if (isDropdownOpened) {
+    <ul class="options" [ngClass]="dropdownOptionsClassName">
+      <img src="assets/icons/custom-select/close.svg"
+           class="close-button"
+           (click)="toggleDropdown()"/>
+
+      @for (item of items; track item; let index=$index;) {
+        <li (click)="selectItem(item, index)"
+            [ngClass]="{ 'selected-item': selectedItemIndex === index }"
+            class="dropdown-item">
+
+          @for (key of getKeys(item); track key) {
+            @if (key === 'countryCode') {
+              <span class="dropdown-item-content">
+                <b>+{{ item[key] }}</b>
+              </span>
+            } @else {
+              <span class="dropdown-item-content full-width">
+                {{ item[key] }}
+              </span>
+            }
+          }
+        </li>
+      }
+    </ul>
+  }
+</div>

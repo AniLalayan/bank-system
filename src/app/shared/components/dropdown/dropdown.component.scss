@@ -1,0 +1,111 @@
+@import "../../../../variables";
+
+.arrow.rotated {
+  transform: rotate(180deg); /* Rotate the icon */
+}
+
+.close-button {
+  width: 7px;
+}
+
+.options {
+  z-index: 100;
+  margin-top: 5px;
+  padding: 33px 0 20px 0;
+  width: 370px;
+  height: 100px;
+  overflow: auto;
+  position: absolute;
+  border: 1px solid white;
+  box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.17),
+  0px 8px 20px -3px rgba(0, 0, 0, 0.15),
+  0px -1.5px 0px 0px rgba(255, 255, 255, 0.25) inset,
+  0px -0.5px 0px 0px rgba(0, 0, 0, 0.2) inset;
+  backdrop-filter: blur(70px);
+  border-radius: 15px 0 0 15px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.3) 100%);
+}
+
+.close-button {
+  width: 10px;
+  padding: 5px;
+  float: right;
+  margin: 3px;
+  background-color: rgb(0,0,0,20%);;
+  border-radius: 15px;
+  display: block;
+  cursor: pointer;
+  position: absolute;
+  top: 6px;
+  right: 8px;
+}
+
+.dropdown {
+  width: 111px;
+  border-radius: 10px 0 0 10px;
+  border: 1px solid $main-dark-color;
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.dropdown-item {
+  list-style-type: none;
+  padding: 0 22px;
+  display: flex;
+  gap: 22px;
+  color: $font-color-dark;
+}
+
+.dropdown-item:hover, .selected-item {
+  background-color: rgba(77, 77, 77, 0.5);
+  color: white;
+  font-weight: 400;
+}
+
+.dropdown-item-content {
+  font-size: 14px;
+  border-bottom: 1px solid;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  min-width: 60px;
+}
+
+.passport {
+  font-size: 10px;
+  margin: 0;
+  padding-right: 5px;
+  background-color: transparent;
+  color: white;
+  border: none;
+  width: 53px;
+}
+
+.passport-dropdown-options {
+  max-width: 248px;
+  padding-top: 29px;
+  position: absolute;
+  right: -40px;
+}
+
+.arrow {
+  position: absolute;
+  padding: 8px 6px;
+  background-color: rgb(0,0,0,20%);
+  border-radius: 50%;
+  top: 9px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.passport-dropdown-arrow {
+  width: 10px;
+  height: 6px;
+  color: white;
+  cursor: pointer;
+}
+
+.full-width {
+  width: 100%;
+}
+

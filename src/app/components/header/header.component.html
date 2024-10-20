@@ -1,0 +1,50 @@
+<header>
+  <div class="container">
+    <div class="logo">
+      <img src="../../../assets/id-business.svg" alt="IDBusiness">
+    </div>
+
+    <div class="user-info">
+      <div style="position: relative">
+        <img src="../../../assets/icons/search.svg" alt="IDBusiness" class="search-icon">
+        <input type="text" class="search-input" [placeholder]="'SYSTEM.HEADER.SEARCH_PLACEHOLDER' | translate"/>
+      </div>
+
+      <div class="profile">
+        @if (userData) {
+          <div class="user-name-group">
+            <p class="user-name">{{userData!.firstName}} {{userData!.lastName}}</p>
+            <app-dropdown
+              [items]="headerMenuItems"
+              [iconUrl]="'assets/icons/custom-select/arrow-down-light.svg'"
+              [selectedItemIndex]="1"
+              [selectedItemLabel]="userData!.passportNumber"
+              (itemSelected)="onItemSelected($event)"
+              [inputClassName]="'passport'"
+              [dropdownOptionsClassName]="'passport-dropdown-options'"
+              [passportDropdownArrowClassName]="'passport-dropdown-arrow'">
+            </app-dropdown>
+          </div>
+        }
+
+        <img src="../../../assets/profile-photo.jpg" alt="Profile Picture" class="profile-photo">
+      </div>
+
+      <div class="notification">
+        <img src="../../../assets/icons/bell.svg" />
+        <div class="badge">3</div>
+      </div>
+
+      <div class="notification">
+        <img src="../../../assets/icons/mail.svg" />
+        <div class="badge">3</div>
+      </div>
+
+      <img src="../../../assets/icons/settings.svg" />
+
+      <app-language-switcher class="languages"></app-language-switcher>
+
+      <img src="../../../assets/icons/logout.svg" class="logout" (click)="logout()" />
+    </div>
+  </div>
+</header>

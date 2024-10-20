@@ -3,19 +3,16 @@ import {ApiService} from '../../shared/services/api.service';
 import {Router} from '@angular/router';
 import {BankAccountModel} from '../../shared/models/bank-account.model';
 import {UserDataModel} from '../../shared/models/user-data.model';
-import {NgClass, UpperCasePipe} from '@angular/common';
 import {AuthService} from '../../shared/services/auth.service';
-import {headerMenuItems} from '../../shared/constants';
-import {LanguageSwitcherComponent} from '../../shared/components/language-switcher/language-switcher.component';
 import {TranslateModule} from '@ngx-translate/core';
 import {BankAccountsComponent} from '../bank-accounts/bank-accounts.component';
-import {ClickOutsideDirective} from '../../shared/directives/click-outside.directive';
 import {Subject, takeUntil, throwError} from 'rxjs';
+import {HeaderComponent} from '../header/header.component';
 
 @Component({
   selector: 'app-system',
   standalone: true,
-  imports: [UpperCasePipe, NgClass, LanguageSwitcherComponent, TranslateModule, BankAccountsComponent, ClickOutsideDirective],
+  imports: [TranslateModule, BankAccountsComponent,  HeaderComponent],
   templateUrl: './system.component.html',
   styleUrl: './system.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -27,10 +24,6 @@ export class SystemComponent implements OnInit, OnDestroy {
   public additionalData!: any;
   public transactions!: any;
   private destroy$ = new Subject<void>();
-
-  public dropDownMenuIconUrl = 'assets/icons/custom-select/arrow-down-light.svg';
-  public isDropdownOpened = false;
-  public headerMenuItems = headerMenuItems;
 
   constructor(private apiService: ApiService,
               private router: Router,
@@ -59,22 +52,6 @@ export class SystemComponent implements OnInit, OnDestroy {
       },
       error: err => throwError(err)
     });
-  }
-
-  toggleDropdown() {
-    this.isDropdownOpened = !this.isDropdownOpened;
-    this.dropDownMenuIconUrl = this.isDropdownOpened ? 'assets/icons/custom-select/arrow-up-light.svg' : 'assets/icons/custom-select/arrow-down-light.svg';
-  }
-
-  public logout() {
-    this.authService.logout();
-  }
-
-  public closeSelectBox(): void {
-    if (this.isDropdownOpened) {
-      this.isDropdownOpened = false;
-      this.dropDownMenuIconUrl = 'assets/icons/custom-select/arrow-down-light.svg';
-    }
   }
 
   ngOnDestroy() {

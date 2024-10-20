@@ -10,11 +10,12 @@ import {LanguageSwitcherComponent} from '../../shared/components/language-switch
 import {TranslateModule} from '@ngx-translate/core';
 import {ClickOutsideDirective} from '../../shared/directives/click-outside.directive';
 import {Subject, takeUntil, throwError} from 'rxjs';
+import {DropdownComponent} from '../../shared/components/dropdown/dropdown.component';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, NgClass, LanguageSwitcherComponent, TranslateModule, ClickOutsideDirective],
+  imports: [FormsModule, ReactiveFormsModule, NgClass, LanguageSwitcherComponent, TranslateModule, ClickOutsideDirective, DropdownComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -27,7 +28,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   public selectedItemIndex: number = 0;
   public isPhoneChecked = false;
   public isSelectBoxOpened = false
-  public selectBoxIconUrl = 'assets/icons/custom-select/arrow-down.svg'
   public showValidationMessages = false;
   public requestErrorMessage = '';
   private destroy$ = new Subject<void>();
@@ -44,7 +44,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   public ngOnInit(): void {
-    this.getSelectedItemIndex();
     this.apiService.getCountryCodes().pipe(
       takeUntil(this.destroy$))
       .subscribe({
@@ -53,16 +52,11 @@ export class LoginComponent implements OnInit, OnDestroy {
           countryCode: country.countryCode,
           countryName: country.countryName
         }));
+        this.getSelectedItemIndex();
         this.cdr.detectChanges();
       },
       error: err => throwError(err),
     });
-  }
-
-  public onCodeChange(event: Event): void {
-    const selectElement = event.target as HTMLSelectElement;
-    this.selectedCode = selectElement.value;
-    this.form.patchValue({ code: this.selectedCode });
   }
 
   public submit(): void {
@@ -132,30 +126,13 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
   }
 
-  public openCloseSelectBox() {
-    if (!this.isSelectBoxOpened) {
-      this.getSelectedItemIndex();
-    }
-    this.isSelectBoxOpened = !this.isSelectBoxOpened;
-    this.selectBoxIconUrl = this.isSelectBoxOpened ? 'assets/icons/custom-select/arrow-up.svg'
-      : 'assets/icons/custom-select/arrow-down.svg'
-  }
-
-  public selectItem(countryCode: CountryCodeModel) {
+  public onItemSelected(countryCode: CountryCodeModel) {
     this.form.controls['code'].setValue(`+${countryCode.countryCode}`);
-    this.openCloseSelectBox();
   }
 
   public getSelectedItemIndex() {
     const value = parseInt(this.form.controls['code'].value);
     this.selectedItemIndex = this.countryCodes.findIndex((item: CountryCodeModel) => item.countryCode === value);
-  }
-
-  public closeSelectBox(): void {
-    if (this.isSelectBoxOpened) {
-      this.isSelectBoxOpened = false;
-      this.selectBoxIconUrl = 'assets/icons/custom-select/arrow-down.svg';
-    }
   }
 
   ngOnDestroy() {

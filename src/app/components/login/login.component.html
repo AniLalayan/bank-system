@@ -17,23 +17,16 @@
         <div class="phone-check-section">
           <div class="form-item">
             <label for="code" class="form-label">{{ 'LOGIN.SELECT_CODE' | translate }}</label>
-            <div style="position: relative" appClickOutside (clickOutside)="closeSelectBox()">
-              <img [src]="selectBoxIconUrl" class="arrow" (click)="openCloseSelectBox()"/>
-              <input type="text" formControlName="code" class="dropdown"/>
 
-              @if (isSelectBoxOpened) {
-                <ul class="options">
-                  <img src="assets/icons/custom-select/close.svg" class="close-button" (click)="openCloseSelectBox()"/>
-                  @for(item of countryCodes; track item.countryCode; let index=$index) {
-                    <li (click)="selectItem(item)" class="dropdown-item"
-                        [ngClass]="{ 'selected-item': selectedItemIndex == index}">
-                      <span class="country-code dropdown-item-content"> +{{ item.countryCode }} </span>
-                      <span class="country-name dropdown-item-content">{{ item.countryName }}</span>
-                    </li>
-                  }
-                </ul>
-              }
-            </div>
+            <app-dropdown
+              [items]="countryCodes"
+              [iconUrl]="'assets/icons/custom-select/arrow-down.svg'"
+              [inputClassName]="'dropdown'"
+              [selectedItemLabel]="form.controls['code'].value"
+              [selectedItemIndex]="selectedItemIndex"
+              (itemSelected)="onItemSelected($event)"
+              [passportDropdownArrowClassName]="'arrow'">
+            </app-dropdown>
           </div>
 
           <div class="form-item">
