@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {catchError, combineLatest, Observable, of} from 'rxjs';
+import {BehaviorSubject, catchError, combineLatest, Observable, of, Subject, tap} from 'rxjs';
 import {CountryCodeModel} from '../models/country-code.model';
 import {ResponseModel} from '../models/response.model';
 
@@ -10,12 +10,16 @@ import {ResponseModel} from '../models/response.model';
 export class ApiService {
 
   private apiUrl = 'http://localhost:3000';
+  // public token = new BehaviorSubject(null);
 
   constructor(private http: HttpClient) {}
 
   public login(username: string, password: string): Observable<any> {
     const body = { username, password };
-    return this.http.post<any>(`${this.apiUrl}/login`, body);
+    return this.http.post<any>(`${this.apiUrl}/login`, body)
+    //   .pipe(tap((res) => {
+    //   this.token.next(res.token);
+    // }));
   }
 
   public checkPhone(username: string): Observable<ResponseModel<any>> {
@@ -27,34 +31,31 @@ export class ApiService {
     return this.http.get<any>(`${this.apiUrl}/GetCountryCode`);
   }
 
-  public getUserData(headers: HttpHeaders): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/getUserData`, { headers })
+  public getUserData(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/getUserData`, )
       .pipe(catchError(err => of({ error: true, message: 'Failed to fetch user data' })));
   }
 
-  public getBankAccounts(headers: HttpHeaders): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/getBankAccounts`, { headers })
+  public getBankAccounts(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/getBankAccounts`)
       .pipe(catchError(err => of({ error: true, message: 'Failed to fetch bank accounts' })));
   }
 
-  public getAdditionalData(headers: HttpHeaders): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/getAdditionalData`, { headers })
+  public getAdditionalData(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/getAdditionalData`)
       .pipe(catchError(err => of({ error: true, message: 'Failed to fetch additional data' })));
   }
 
-  public getTransactions(headers: HttpHeaders): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/getTransactions`, { headers })
+  public getTransactions(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/getTransactions`)
       .pipe(catchError(err => of({ error: true, message: 'Failed to fetch transactions' })));
   }
 
-  public fetchAllData(token: string): Observable<any> {
-    const headers = new HttpHeaders({
-      'Authorization': `${token}`
-    });
-    const userData$ = this.getUserData(headers);
-    const bankAccounts$ = this.getBankAccounts(headers);
-    const additionalData$ = this.getAdditionalData(headers);
-    const transactions$ = this.getTransactions(headers);
+  public fetchAllData(): Observable<any> {
+    const userData$ = this.getUserData();
+    const bankAccounts$ = this.getBankAccounts();
+    const additionalData$ = this.getAdditionalData();
+    const transactions$ = this.getTransactions();
 
     return combineLatest([userData$, bankAccounts$, additionalData$, transactions$]);
   }

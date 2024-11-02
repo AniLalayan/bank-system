@@ -33,14 +33,14 @@ export class SystemComponent implements OnInit, OnDestroy {
   public ngOnInit() {
     const token = localStorage.getItem('token');
     if (token) {
-      this.fetchData(token);
+      this.fetchData();
     } else {
       this.authService.logout();
     }
   }
 
-  public fetchData(token: string) {
-    this.apiService.fetchAllData(token).pipe(
+  public fetchData() {
+    this.apiService.fetchAllData().pipe(
       takeUntil(this.destroy$))
       .subscribe( {
       next: results => {
